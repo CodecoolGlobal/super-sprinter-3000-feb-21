@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org/">
+<head>
+    <meta charset="UTF-8"/>
+    <title th:text="${title}">Title</title>
+</head>
+<body>
+    <h1 th:text="${header}"></h1>
+    <a th:href="@{/story}">Add User Story</a>
+
+    <h2>User Stories:</h2>
+    <table border="1">
+        <tr>
+            <th>Id</th>
+            <th>Story Title</th>
+            <th>User Story</th>
+            <th>Acceptance Criteria</th>
+            <th>Business Value</th>
+            <th>Estimation</th>
+            <th>Status</th>
+            <th>Edit</th>
+        </tr>
+        <tr th:each="s, state: ${allUserStories}"
+            class="row" th:classappend="${state.odd} ? 'odd-row' : 'even-row'">
+            <td th:utext="${s.id}">Id</td>
+            <td th:utext="${s.title}">Story Title</td>
+            <td th:utext="${s.story}">User Story</td>
+            <td th:utext="${s.acceptanceCriteria}">Acceptance Criteria</td>
+            <td th:utext="${s.businessValue +' points'}">Business Value</td>
+            <td th:utext="${s.estimation + 'h'}">Estimation</td>
+            <td th:utext="${s.status}">Status</td>
+            <td>
+                <a th:href="@{/story/{id}(id=${s.id})}">Edit</a>
+            </td>
+        </tr>
+    </table>
+
+</body>
+</html>

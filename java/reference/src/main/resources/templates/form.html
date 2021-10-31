@@ -1,0 +1,36 @@
+<div th:fragment="formField(action)">
+    <p>
+        Story Title: <input type="text" th:field="*{title}"/>
+        <span th:if="${#fields.hasErrors('title')}" th:errors="*{title}">Title Error</span>
+    </p>
+    <p>
+        User Story: <textarea th:field="*{story}"></textarea>
+        <span th:if="${#fields.hasErrors('story')}" th:errors="*{story}">Story Error</span>
+    </p>
+    <p>
+        Acceptance Criteria: <textarea th:field="*{acceptanceCriteria}"></textarea>
+        <span th:if="${#fields.hasErrors('acceptanceCriteria')}"
+              th:errors="*{acceptanceCriteria}">Acceptance Criteria Error</span>
+    </p>
+    <p>
+        Business Value: <input type="number" th:field="*{businessValue}"
+                               min="100" max="1500" step="100" onkeydown="return false"/>
+        <span th:if="${#fields.hasErrors('businessValue')}"
+              th:errors="*{businessValue}">Business Value Error</span>
+    </p>
+    <p>
+        Estimation: <input type="number" th:field="*{estimation}"
+                           min="0.5" max="40" step="0.5" onkeydown="return false"/>
+        <span th:if="${#fields.hasErrors('estimation')}"
+              th:errors="*{estimation}">Estimation Error</span>
+    </p>
+    <select th:field="*{status}">
+        <option
+                th:each="dropdownValue: ${dropDownAllStatuses}"
+                th:value="${dropdownValue}"
+                th:text="${dropdownValue}" ></option>
+    </select>
+    <p>
+        <input type="submit" th:value="${action}" />
+    </p>
+</div>
